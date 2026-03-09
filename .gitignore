@@ -1,0 +1,26 @@
+# Virtual Environments
+.env/
+env/
+.venv/
+venv/
+ENV/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE and OS Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Project Specific (Crucial to ignore for GitHub!)
+# We must never upload our massive datasets to GitHub
+dataset/
+# We also shouldn't upload our trained model weights directly to GitHub
+# because .h5 files can exceed GitHub's 100MB file limit.
+outputs/models/
+temp_uploaded_img.jpg

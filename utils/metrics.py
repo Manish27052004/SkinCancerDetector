@@ -49,9 +49,25 @@ def calculate_classification_metrics(y_true, y_pred_probs, outputs_dir):
     y_pred_probs = np.array(y_pred_probs).flatten()
     y_pred = (y_pred_probs > 0.5).astype(int)
     
-    # Calculate F1-Score
+    # Generate Confusion Matrix FIRST to extract TP, FP, TN, FN
+    cm = confusion_matrix(y_true, y_pred)
+    tn, fp, fn, tp = cm.ravel()
+    
+    # Calculate detailed metrics
+    accuracy = (tp + tn) / (tp + tn + fp + fn)
+    precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
+    recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0  # Recall is same as Sensitivity
+    sensitivity = recall
+    specificity = tn / (tn + fp) if (tn + fp) > 0 else 0.0
     f1 = f1_score(y_true, y_pred)
-    print(f"F1 Score: {f1:.4f}")
+    
+    print("\n--- Detailed Metrics Calculation ---")
+    print(f"Accuracy:    {accuracy:.4f}")
+    print(f"Precision:   {precision:.4f}")
+    print(f"Recall:      {recall:.4f}")
+    print(f"F1 Score:    {f1:.4f}")
+    print(f"Sensitivity: {sensitivity:.4f}")
+    print(f"Specificity: {specificity:.4f}")
     
     # Print full classification report
     print("\nClassification Report:")

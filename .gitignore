@@ -24,3 +24,4 @@ dataset/
 # because .h5 files can exceed GitHub's 100MB file limit.
 outputs/models/
 temp_uploaded_img.jpg
+melanoma_cancer_dataset
